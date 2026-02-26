@@ -1,0 +1,162 @@
+* { box-sizing: border-box; }
+
+body {
+	font-family: 'Segoe UI', sans-serif;
+	background-color: #f4f4f9;
+	padding: 20px;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+}
+
+/* 3-Column Layout */
+.main-layout {
+	display: flex;
+	gap: 20px;
+	align-items: flex-start;
+}
+
+.panel {
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+	display: flex;
+	flex-direction: column;
+}
+
+/* Widths */
+.col-settings { width: 250px; }
+.col-rules    { width: 340px; }
+.col-sim      { width: auto; min-width: 300px; align-items: center; }
+
+h3 {
+	margin-top: 0;
+	margin-bottom: 15px;
+	font-size: 16px;
+	border-bottom: 2px solid #eee;
+	padding-bottom: 8px;
+	color: #333;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+hr { border: 0; border-top: 1px solid #eee; margin: 15px 0; width: 100%; }
+
+.description { font-size: 12px; color: #666; margin-bottom: 8px; margin-top: 0; }
+
+/* Inputs */
+.control-group { margin-bottom: 12px; }
+label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 13px; color: #555; }
+select, input[type="number"], input[type="text"] {
+	width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;
+}
+
+/* Symbol Table */
+.symbol-table {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.symbol-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.symbol-color {
+	width: 24px; height: 24px; border: 1px solid #999; border-radius: 3px;
+}
+.symbol-input {
+	width: 60px !important; text-align: center; font-weight: bold;
+}
+
+/* Palette */
+.palette-grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 5px;
+	margin-bottom: 10px;
+}
+.palette-btn {
+	height: 30px; border: 1px solid #bbb; cursor: pointer;
+	display: flex; align-items: center; justify-content: center;
+	font-weight: bold; font-size: 12px; border-radius: 4px;
+}
+.palette-btn.selected {
+	outline: 2px solid #333; transform: scale(1.1); z-index: 2;
+}
+
+/* Rule Editor */
+.rule-editor {
+	background: #f8f9fa; padding: 10px; border: 1px solid #ddd; border-radius: 6px;
+	display: flex; flex-direction: column; align-items: center;
+}
+.mini-grid {
+	display: grid; gap: 2px; margin-bottom: 10px;
+}
+.cell-btn {
+	width: 30px; height: 30px; border: 1px solid #999; cursor: pointer;
+	display: flex; align-items: center; justify-content: center;
+	font-weight: bold; font-size: 12px; background-color: white;
+}
+.result-container {
+	display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.cell-display {
+	width: 36px; height: 36px; border: 2px solid #666; cursor: pointer;
+	display: flex; align-items: center; justify-content: center;
+	font-weight: bold; font-size: 14px;
+}
+
+/* Rule List */
+.rule-list {
+	max-height: 400px; overflow-y: auto; background: #fafafa; border: 1px solid #eee;
+}
+.rule-item {
+	padding: 5px 8px; border-bottom: 1px solid #eee;
+	display: flex; justify-content: space-between; align-items: center; background: #fff;
+}
+.rule-visual-container { display: flex; align-items: center; gap: 8px; }
+
+.mini-preview {
+	display: grid; gap: 1px; border: 1px solid #ccc; background-color: #ccc;
+}
+.preview-cell {
+	width: 10px; height: 10px; font-size: 8px;
+	display: flex; align-items: center; justify-content: center; background-color: white;
+}
+.preview-arrow { font-size: 14px; color: #888; }
+.preview-result {
+	width: 18px; height: 18px; border: 1px solid #999; font-size: 10px;
+	display: flex; align-items: center; justify-content: center; font-weight: bold;
+}
+.delete-btn {
+	width: 20px; height: 20px; background: #ffeff0; color: #dc3545;
+	border: 1px solid #ffbdc3; border-radius: 3px; cursor: pointer;
+	display: flex; align-items: center; justify-content: center; font-size: 10px;
+}
+
+/* Sim Area */
+canvas { border: 1px solid #999; box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor: crosshair; }
+.action-buttons { margin-top: 10px; display: flex; gap: 10px; width: 100%; }
+.btn {
+	padding: 8px; cursor: pointer; border: none; border-radius: 4px;
+	color: white; background-color: #007bff; font-size: 13px; flex: 1;
+}
+.btn:hover { background-color: #0056b3; }
+.btn-success { background-color: #28a745; width: 100%; margin-top: 5px; }
+.btn-danger { background-color: #dc3545; }
+.btn-warning { background-color: #ffc107; color: #333; }
+
+.zigzag-border {
+	/* צבע הרקע של האלמנט */
+	background: #007bff; 
+	
+	/* יצירת אפקט החיתוך */
+	--mask: conic-gradient(from -45deg at bottom,#0000,#000 1deg 90deg,#0000 91deg) 50% / 20px 100%;
+	-webkit-mask: var(--mask);
+	mask: var(--mask);
+	
+	/* הוספת מרווח פנימי כדי שהתוכן לא ייחתך */
+	padding-bottom: 20px; 
+}
