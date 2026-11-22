@@ -12,6 +12,8 @@ body {
 /* 3-Column Layout */
 .main-layout {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	gap: 20px;
 	align-items: flex-start;
 }
@@ -26,9 +28,10 @@ body {
 }
 
 /* Widths */
-.col-settings { width: 250px; }
-.col-rules    { width: 340px; }
-.col-sim      { width: auto; min-width: 300px; align-items: center; }
+.col-settings     { width: 230px; }
+.col-rules        { width: 260px; }
+.col-active-rules { width: 310px; }
+.col-sim          { width: auto; min-width: 300px; align-items: center; }
 
 h3 {
 	margin-top: 0;
@@ -57,6 +60,7 @@ select, input[type="number"], input[type="text"] {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+	margin-bottom: 10px;
 }
 .symbol-row {
 	display: flex;
@@ -108,9 +112,39 @@ select, input[type="number"], input[type="text"] {
 	font-weight: bold; font-size: 14px;
 }
 
+.mode-toggle {
+	margin-bottom: 10px;
+	padding: 6px 8px;
+	background: #f0f4f8;
+	border: 1px solid #d0dbe5;
+	border-radius: 4px;
+}
+
+.mode-toggle label {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.mode-hint {
+	margin: 4px 0 0 20px;
+	font-size: 11px;
+	color: #555;
+	line-height: 1.3;
+}
+
+.cell-selected {
+	outline: 3px solid #007bff;
+	outline-offset: -2px;
+	z-index: 2;
+}
+
 /* Rule List */
 .rule-list {
-	max-height: 400px; overflow-y: auto; background: #fafafa; border: 1px solid #eee;
+	max-height: 600px; overflow-y: auto; background: #fafafa; border: 1px solid #eee;
 }
 .rule-item {
 	padding: 5px 8px; border-bottom: 1px solid #eee;
@@ -136,6 +170,36 @@ select, input[type="number"], input[type="text"] {
 	display: flex; align-items: center; justify-content: center; font-size: 10px;
 }
 
+.rule-actions {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.move-btn {
+	width: 20px;
+	height: 20px;
+	background: #f0f4f8;
+	color: #333;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	padding: 0;
+}
+
+.move-btn:hover:not(:disabled) {
+	background: #e2e8f0;
+}
+
+.move-btn:disabled {
+	opacity: 0.35;
+	cursor: not-allowed;
+}
+
 /* Sim Area */
 canvas { border: 1px solid #999; box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor: crosshair; }
 .action-buttons { margin-top: 10px; display: flex; gap: 10px; width: 100%; }
@@ -159,4 +223,204 @@ canvas { border: 1px solid #999; box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor:
 	
 	/* הוספת מרווח פנימי כדי שהתוכן לא ייחתך */
 	padding-bottom: 20px; 
+}
+
+.btn:disabled {
+	background-color: #cccccc;
+	color: #666666;
+	cursor: not-allowed;
+}
+
+/* Export Controls */
+.export-controls {
+	width: 100%;
+	margin-top: 5px;
+}
+
+.export-row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.export-row input[type="number"] {
+	width: 70px;
+}
+
+.export-row .btn {
+	margin-top: 0;
+}
+
+.print-only {
+	display: none;
+}
+
+/* Print / PDF Report Layout */
+@media print {
+	* {
+		-webkit-print-color-adjust: exact !important;
+		print-color-adjust: exact !important;
+	}
+
+	body {
+		background: white;
+		padding: 0;
+		margin: 0;
+		display: block;
+	}
+
+	.main-layout {
+		display: none !important;
+	}
+
+	.print-only {
+		display: block !important;
+		width: 100%;
+		color: #000;
+		font-family: 'Segoe UI', sans-serif;
+	}
+
+	.print-header {
+		border-bottom: 2px solid #333;
+		padding-bottom: 10px;
+		margin-bottom: 15px;
+	}
+
+	.print-header h1 {
+		margin: 0 0 8px 0;
+		font-size: 20px;
+	}
+
+	.print-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 15px;
+		font-size: 13px;
+	}
+
+	.print-section {
+		margin-bottom: 20px;
+	}
+
+	.print-section h2 {
+		font-size: 15px;
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 4px;
+		margin: 0 0 10px 0;
+		text-transform: uppercase;
+	}
+
+	.print-legend {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.print-legend-item {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		border: 1px solid #ccc;
+		padding: 4px 8px;
+		border-radius: 4px;
+		font-size: 12px;
+	}
+
+	.print-legend-box {
+		width: 18px;
+		height: 18px;
+		border: 1px solid #666;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		font-size: 11px;
+	}
+
+	.print-rules-grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.print-rule-card {
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		padding: 8px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 6px;
+		break-inside: avoid;
+	}
+
+	.print-rule-title {
+		font-size: 11px;
+		font-weight: bold;
+		color: #444;
+	}
+
+	.print-rule-body {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.print-mini-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 18px);
+		grid-template-rows: repeat(3, 18px);
+		gap: 1px;
+		background: #ccc;
+		border: 1px solid #999;
+	}
+
+	.print-mini-cell {
+		width: 18px;
+		height: 18px;
+		font-size: 10px;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.print-rule-result {
+		width: 24px;
+		height: 24px;
+		border: 1px solid #666;
+		font-size: 12px;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.print-steps-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 14px;
+	}
+
+	.print-step-card {
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		padding: 8px;
+		text-align: center;
+		break-inside: avoid;
+	}
+
+	.print-step-title {
+		font-size: 12px;
+		font-weight: bold;
+		margin-bottom: 6px;
+	}
+
+	.print-step-img {
+		max-width: 100%;
+		height: auto;
+		border: 1px solid #999;
+		display: block;
+		margin: 0 auto;
+	}
 }

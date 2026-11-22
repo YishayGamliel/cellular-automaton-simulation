@@ -45,12 +45,20 @@
 			
 			<h3>State Symbols</h3>
 			<p class="description">Customize char (max 2).</p>
-			<div id="symbolTableContainer" class="symbol-table">
-				</div>
+			<div id="symbolTableContainer" class="symbol-table"> </div>
+			<button id="btnAddState" class="btn btn-success">+ Add State</button>
 		</div>
 
 		<div class="panel col-rules">
 			<h3>Rule Builder</h3>
+
+			<div class="mode-toggle">
+				<label>
+					<input type="checkbox" id="chkSelectFirst">
+					Select cell first (Grid &rarr; Palette / Keyboard)
+				</label>
+				<p class="mode-hint">Keyboard: type symbol/digit, arrows to move, Delete/Backspace for '?' (0 on grid).</p>
+			</div>
 			
 			<p class="description">1. Select Tool (State or '?')</p>
 			<div id="paletteContainer" class="palette-grid"></div>
@@ -70,8 +78,6 @@
 			</div>
 
 			<hr>
-			<h3>Active Rules</h3>
-			<div id="ruleListContainer" class="rule-list"></div>
 		</div>
 
 		<div class="panel col-sim">
@@ -80,16 +86,31 @@
 			
 			<div class="action-buttons">
 				<button id="btnStartStop" class="btn">Start/Stop</button>
+				<button id="btnStepBack" class="btn" disabled>Step Back</button>
 				<button id="btnStep" class="btn">Step</button>
 			</div>
 			<div class="action-buttons">
 				<button id="btnRestart" class="btn btn-warning">Restart</button>
 				<button id="btnClear" class="btn btn-danger">Clear Grid</button>
 			</div>
+			<hr>
+			<div class="export-controls">
+				<label for="exportSteps">Export Steps (0 to N):</label>
+				<div class="export-row">
+					<input type="number" id="exportSteps" value="5" min="0" max="100">
+					<button id="btnExportPdf" class="btn btn-success">Export PDF</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel col-active-rules">
+			<h3>Active Rules</h3>
+			<div id="ruleListContainer" class="rule-list"></div>
 		</div>
 
 	</div>
-
+	
+	<div id="printReport" class="print-only"></div>
 	<script src="script.js"></script>
 </body>
 </html>
